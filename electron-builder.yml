@@ -1,0 +1,41 @@
+appId: YourAppID
+asar: true
+compression: maximum
+productName: YourAppName
+directories:
+  output: "release/${version}"
+files:
+  - dist
+  - dist-electron
+  - "!**/*.map" # Loại bỏ source map files
+  - "!**/node_modules/**"     # Loại bỏ file không cần thiết
+mac:
+  target:
+    - dmg
+    - zip # Thêm định dạng zip cho Mac
+  artifactName: "${productName}-Mac-${version}-Installer.${ext}"
+  category: public.app-category.productivity # Thêm category
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  artifactName: "${productName}-Windows-${version}-Setup.${ext}"
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+  createDesktopShortcut: true # Tạo shortcut desktop
+  createStartMenuShortcut: true # Tạo shortcut start menu
+  shortcutName: "${productName}" # Tên shortcut
+  # installerIcon: "build/icon.ico" # Icon cho installer
+  # uninstallerIcon: "build/icon.ico" # Icon cho uninstaller
+  # installerHeader: "build/installer-header.bmp" # Header cho installer
+  # installerSidebar: "build/installer-sidebar.bmp" # Sidebar cho installer
+linux:
+  target:
+    - AppImage
+    - deb # Thêm định dạng deb cho Linux
+  artifactName: "${productName}-Linux-${version}.${ext}"
+  category: Utility # Thêm category cho Linux
